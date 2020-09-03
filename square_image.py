@@ -20,7 +20,16 @@ def square_image(image_path, background_sigma=5):
     x_offset = int((max_dimen - w) / 2.)
     blur_img[y_offset: y_offset+h, x_offset:x_offset+w, :] = img[:, :, :]
 
-    plt.imshow(blur_img)
+    fig, axes = plt.subplots(nrows=1, ncols=2, sharex=True, sharey=True, figsize=(10, 10))
+    ax = axes.ravel()
+
+    ax[0].imshow(img, cmap=plt.cm.gray)
+    ax[0].set_title('Original Image')
+
+    ax[1].imshow(blur_img, cmap=plt.cm.gray)
+    ax[1].set_title('Squared Image')
+
+    fig.tight_layout()
     plt.show()
 
 image_path = sys.argv[1]
